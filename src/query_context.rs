@@ -18,4 +18,8 @@ impl QueryContext {
       working_directory: working_dir
     })
   }
+
+  pub fn execute_query(&self, query: String) -> Result<String, String> {
+    Err("Failed to execute query".into())
+  }
 }

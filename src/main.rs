@@ -1,3 +1,5 @@
+mod query_context;
+
 extern crate clap;
 use clap::{Arg, App};
 
@@ -15,4 +17,6 @@ fn main() {
                     .get_matches();
     let working_directory = matches.value_of("working_directory").unwrap_or("./");
     println!("Value for config: {}", working_directory);
+
+    query_context::QueryContext::new(working_directory);
 }

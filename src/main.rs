@@ -1,6 +1,7 @@
 mod query_context;
 
 extern crate clap;
+extern crate log_ql;
 use clap::{Arg, App};
 
 fn main() {

@@ -5,3 +5,4 @@ authors = ["Jan Schulte <hello@unexpected-co.de>"]
 
 [dependencies]
 clap = "2.26.0"
+log-ql = { git = "https://github.com/schultyy/log-ql", rev = "1471766e9771330e8024e175bf95dec4645cf3da" }

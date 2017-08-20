@@ -1,6 +1,7 @@
 use std::fs;
-use std::io::Error;
 use std::path::PathBuf;
+
+use log_ql;
 
 pub struct QueryContext {
   working_directory: PathBuf
@@ -19,7 +20,43 @@ impl QueryContext {
     })
   }
 
+  fn parse(&self, query: String) -> Result<(String, String, String, String), String> {
+    let query_ast = try!(log_ql::get_ast_for_query(query));
+    let log_filename;
+    let query_field;
+    let conditional_field;
+    let conditional_value;
+
+    let left_node = match query_ast.left {
+      Some(n) => n,
+      None => return Err("Expected Log file node, got None".into())
+    };
+
+    let right_node = match query_ast.right {
+      Some(n) => n,
+      None => return Err("Expected conditional query node, got None".into())
+    };
+
+    if let log_ql::GrammarItem::LogFile { ref field, ref filename } = left_node.entry {
+      log_filename = filename.clone();
+      query_field = field.clone();
+    } else {
+      return Err("Couldn't deref Logfile node".into());
+    }
+
+    if let log_ql::GrammarItem::Condition { ref field, ref value } = right_node.entry {
+      conditional_field = field.clone();
+      conditional_value = value.clone();
+    } else {
+      return Err("Couldn't deref Conditional node".into());
+    }
+
+    Ok((log_filename, query_field, conditional_field, conditional_value))
+  }
+
   pub fn execute_query(&self, query: String) -> Result<String, String> {
+    let (log_filename, query_field, conditional_field, conditional_value) = try!(self.parse(query));
+
     Err("Failed to execute query".into())
   }
 }

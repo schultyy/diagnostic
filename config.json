@@ -1,0 +1,10 @@
+{
+  "file_type": "travis_log_last_2000.log",
+  "columns": [
+    "severity",
+    "date",
+    "message",
+    "component"
+  ],
+  "regex": "..."
+}

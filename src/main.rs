@@ -1,4 +1,11 @@
 mod query_context;
+mod configuration;
+
+#[macro_use]
+extern crate serde_derive;
+
+extern crate serde;
+extern crate serde_json;
 
 extern crate clap;
 extern crate log_ql;
@@ -23,6 +30,8 @@ fn main() {
     let working_directory = matches.value_of("working_directory").unwrap_or("./");
     let query = matches.value_of("QUERY").unwrap();
 
+    let configuration = configuration::Configuration::from_file("config.json");
+    println!("Read configuration {:?}", configuration);
 
     let query_context = match query_context::QueryContext::new(working_directory) {
         Ok(context) => context,

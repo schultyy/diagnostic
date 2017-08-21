@@ -15,6 +15,11 @@
       "name": "message",
       "capture_group": 2,
       "regex": "\\[\\d+-\\d+-\\d+T\\d+:\\d+:\\d+\\+\\d+\\]\\[(\\w+-?:?)+\\](.+)"
+    },
+    {
+      "name": "severity",
+      "capture_group": 0,
+      "regex": "(ERROR|INFO)"
     }
   ]
 }

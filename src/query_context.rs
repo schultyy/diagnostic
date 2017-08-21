@@ -2,7 +2,6 @@ use std::fs;
 use std::path::PathBuf;
 use configuration::Configuration;
 use log_file;
-
 use log_ql;
 
 pub struct QueryContext {
@@ -58,11 +57,20 @@ impl QueryContext {
     Ok((log_filename, query_field, conditional_field, conditional_value))
   }
 
-  pub fn execute_query(&self, query: String) -> Result<String, String> {
+  fn filter_log_file(&self, log_file: log_file::LogFile, query_field: String, conditional_field: String, conditional_value: String) -> Vec<String> {
+    log_file
+      .search_field(conditional_field, conditional_value)
+      .iter()
+      .map(|r| r.get_field(&query_field))
+      .filter(|f| f.is_some())
+      .map(|f| f.unwrap())
+      .collect::<Vec<String>>()
+  }
+
+  pub fn execute_query(&self, query: String) -> Result<Vec<String>, String> {
     let (log_filename, query_field, conditional_field, conditional_value) = try!(self.parse(query));
 
     let log_file = log_file::from_file(self.working_directory.join(log_filename), &self.configuration);
-
-    Err("Failed to execute query".into())
+    Ok(self.filter_log_file(log_file, query_field, conditional_field, conditional_value))
   }
 }

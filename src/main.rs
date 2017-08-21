@@ -46,7 +46,7 @@ fn main() {
 
     match query_context.execute_query(query.into()) {
         Ok(result) => {
-            println!("{}", result);
+            println!("{:?}", result);
         },
         Err(error) => {
             println!("{}", error);

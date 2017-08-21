@@ -7,6 +7,7 @@ use regex::Regex;
 use configuration::Configuration;
 
 #[derive(Debug)]
+#[derive(Clone)]
 pub struct Row {
   values: HashMap<String, String>
 }
@@ -23,8 +24,22 @@ impl Row {
     }
   }
 
+  pub fn get_field(&self, key: &String) -> Option<String> {
+    match self.values.get(key) {
+      Some(value) => Some(value.clone()),
+      None => None
+    }
+  }
+
   pub fn store(&mut self, key: String, value: String) {
     self.values.insert(key, value);
+  }
+
+  pub fn matches(&self, key: &String, expected_value: &String) -> bool {
+    match self.values.get(key) {
+      Some(actual_value) => actual_value == expected_value,
+      None => false
+    }
   }
 }
 
@@ -37,6 +52,13 @@ impl LogFile {
 
   pub fn store(&mut self, row: Row) {
     self.rows.push(row);
+  }
+
+  pub fn search_field(&self, field_name: String, field_value: String) -> Vec<Row> {
+    self.rows.iter()
+              .filter(|r| r.matches(&field_name, &field_value))
+              .map(|r| r.clone())
+              .collect()
   }
 }
 

@@ -52,7 +52,7 @@ fn main() {
             println!("{} rows returned", result_list.len());
         },
         Err(error) => {
-            println!("{}", error);
+            println!("ERROR: {}", error);
             std::process::exit(1)
         }
     }

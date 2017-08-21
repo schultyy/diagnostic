@@ -1,14 +1,17 @@
 use std::fs;
 use std::path::PathBuf;
+use configuration::Configuration;
+use log_file;
 
 use log_ql;
 
 pub struct QueryContext {
-  working_directory: PathBuf
+  working_directory: PathBuf,
+  configuration: Configuration
 }
 
 impl QueryContext {
-  pub fn new(working_directory: &str) -> Result<QueryContext, String> {
+  pub fn new(working_directory: &str, configuration: Configuration) -> Result<QueryContext, String> {
     let srcdir = PathBuf::from(working_directory);
     let working_dir = match fs::canonicalize(&srcdir) {
       Ok(p) => p,
@@ -16,7 +19,8 @@ impl QueryContext {
     };
 
     Ok(QueryContext {
-      working_directory: working_dir
+      working_directory: working_dir,
+      configuration: configuration
     })
   }
 
@@ -56,6 +60,8 @@ impl QueryContext {
 
   pub fn execute_query(&self, query: String) -> Result<String, String> {
     let (log_filename, query_field, conditional_field, conditional_value) = try!(self.parse(query));
+
+    log_file::from_file(self.working_directory.join(log_filename), &self.configuration);
 
     Err("Failed to execute query".into())
   }

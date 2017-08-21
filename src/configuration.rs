@@ -3,10 +3,16 @@ use std::io::prelude::*;
 use serde_json;
 
 #[derive(Serialize, Deserialize, Debug)]
+pub struct Column {
+  pub name: String,
+  pub regex: String,
+  pub capture_group: usize
+}
+
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Configuration {
   pub file_type: String,
-  pub columns: Vec<String>,
-  pub regex: String
+  pub columns: Vec<Column>
 }
 
 impl Configuration {

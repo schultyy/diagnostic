@@ -45,8 +45,12 @@ fn main() {
     };
 
     match query_context.execute_query(query.into()) {
-        Ok(result) => {
-            println!("{:?}", result);
+        Ok(result_list) => {
+            for row in &result_list {
+                println!("| {} |", row);
+            }
+            println!("---");
+            println!("{} rows returned", result_list.len());
         },
         Err(error) => {
             println!("{}", error);

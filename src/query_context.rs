@@ -61,7 +61,7 @@ impl QueryContext {
   pub fn execute_query(&self, query: String) -> Result<String, String> {
     let (log_filename, query_field, conditional_field, conditional_value) = try!(self.parse(query));
 
-    log_file::from_file(self.working_directory.join(log_filename), &self.configuration);
+    let log_file = log_file::from_file(self.working_directory.join(log_filename), &self.configuration);
 
     Err("Failed to execute query".into())
   }

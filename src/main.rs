@@ -34,7 +34,6 @@ fn main() {
     let query = matches.value_of("QUERY").unwrap();
 
     let configuration = configuration::Configuration::from_file("config.json");
-    println!("Read configuration {:?}", configuration);
 
     let query_context = match query_context::QueryContext::new(working_directory, configuration) {
         Ok(context) => context,

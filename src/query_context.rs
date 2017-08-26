@@ -11,8 +11,8 @@ pub struct QueryContext {
 
 impl QueryContext {
   pub fn new(working_directory: &str, configuration: Configuration) -> Result<QueryContext, String> {
-    let srcdir = PathBuf::from(working_directory);
-    let working_dir = match fs::canonicalize(&srcdir) {
+    let src_dir = PathBuf::from(working_directory);
+    let working_dir = match fs::canonicalize(&src_dir) {
       Ok(p) => p,
       Err(_) => return Err(format!("Failed to get absolute path from {:?}", working_directory))
     };
@@ -25,7 +25,7 @@ impl QueryContext {
 
   fn parse(&self, query: String) -> Result<(String, Vec<String>, String, String), String> {
     let mut parser = log_ql::parser::Parser::new(query);
-    let query_ast = try!(parser.parse());
+    let query_ast = parser.parse()?;
     let log_filename;
     let query_fields;
     let conditional_field;
@@ -72,7 +72,7 @@ impl QueryContext {
   }
 
   pub fn execute_query(&self, query: String) -> Result<Vec<String>, String> {
-    let (log_filename, query_fields, conditional_field, conditional_value) = try!(self.parse(query));
+    let (log_filename, query_fields, conditional_field, conditional_value) = self.parse(query)?;
 
     let log_file = log_file::from_file(self.working_directory.join(log_filename), &self.configuration);
     Ok(self.filter_log_file(log_file, query_fields, conditional_field, conditional_value))

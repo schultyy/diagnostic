@@ -62,11 +62,11 @@ impl QueryContext {
     log_file
       .search_field(conditional_field, conditional_value)
       .iter()
-      .map(|r| {
+      .flat_map(|r| {
           query_fields
               .iter()
-              .flat_map(|query_field| r.get_field(query_field))
-              .collect::<_>()
+              .map(|query_field| r.get_field(query_field))
+              .collect::<Option<String>>()
       })
       .collect::<Vec<String>>()
   }

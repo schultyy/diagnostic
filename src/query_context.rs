@@ -1,6 +1,7 @@
 use std::fs;
 use std::path::PathBuf;
 use configuration::Configuration;
+use query_request::QueryRequest;
 use log_file;
 use log_ql;
 
@@ -23,7 +24,7 @@ impl QueryContext {
         })
     }
 
-    fn parse(&self, query: String) -> Result<(String, Vec<String>, String, String), String> {
+    fn parse(&self, query: String) -> Result<QueryRequest, String> {
         let mut parser = log_ql::parser::Parser::new(query);
         let query_ast = parser.parse()?;
         let log_filename;
@@ -55,7 +56,7 @@ impl QueryContext {
             return Err("Couldn't deref Conditional node".into());
         }
 
-        Ok((log_filename, query_fields, conditional_field, conditional_value))
+        Ok(QueryRequest::new(log_filename, query_fields, conditional_field, conditional_value))
     }
 
     fn filter_log_file(&self, log_file: log_file::LogFile, query_fields: Vec<String>, conditional_field: String, conditional_value: String) -> Vec<String> {
@@ -72,9 +73,9 @@ impl QueryContext {
     }
 
     pub fn execute_query(&self, query: String) -> Result<Vec<String>, String> {
-        let (log_filename, query_fields, conditional_field, conditional_value) = self.parse(query)?;
+        let query_request = self.parse(query)?;
 
-        let log_file = log_file::from_file(self.working_directory.join(log_filename), &self.configuration);
-        Ok(self.filter_log_file(log_file, query_fields, conditional_field, conditional_value))
+        let log_file = log_file::from_file(self.working_directory.join(query_request.log_filename), &self.configuration);
+        Ok(self.filter_log_file(log_file, query_request.query_fields, query_request.conditional_field, query_request.conditional_value))
     }
 }

@@ -1,7 +1,7 @@
 use std::fs;
 use std::path::PathBuf;
 use configuration::Configuration;
-use query_request::QueryRequest;
+use query_request::{QueryRequest, QueryRequestBuilder};
 use log_file;
 use log_ql;
 
@@ -27,10 +27,7 @@ impl QueryContext {
     fn parse(&self, query: String) -> Result<QueryRequest, String> {
         let mut parser = log_ql::parser::Parser::new(query);
         let query_ast = parser.parse()?;
-        let log_filename;
-        let query_fields;
-        let conditional_field;
-        let conditional_value;
+        let mut request_builder = QueryRequestBuilder::new();
 
         let left_node = match query_ast.left {
             Some(n) => n,
@@ -43,20 +40,20 @@ impl QueryContext {
         };
 
         if let log_ql::parser::GrammarItem::LogFile { ref fields, ref filename } = left_node.entry {
-            log_filename = filename.clone();
-            query_fields = fields.clone();
+            request_builder.set_log_filename(filename.clone());
+            request_builder.set_query_fields(fields.clone());
         } else {
             return Err("Couldn't deref Logfile node".into());
         }
 
         if let log_ql::parser::GrammarItem::Condition { ref field, ref value } = right_node.entry {
-            conditional_field = field.clone();
-            conditional_value = value.clone();
+            request_builder.set_conditional_field(field.clone());
+            request_builder.set_conditional_value(value.clone());
         } else {
             return Err("Couldn't deref Conditional node".into());
         }
 
-        Ok(QueryRequest::new(log_filename, query_fields, conditional_field, conditional_value))
+        Ok(request_builder.build())
     }
 
     fn filter_log_file(&self, log_file: log_file::LogFile, query_fields: Vec<String>, conditional_field: String, conditional_value: String) -> Vec<String> {
@@ -76,6 +73,6 @@ impl QueryContext {
         let query_request = self.parse(query)?;
 
         let log_file = log_file::from_file(self.working_directory.join(query_request.log_filename), &self.configuration);
-        Ok(self.filter_log_file(log_file, query_request.query_fields, query_request.conditional_field, query_request.conditional_value))
+        Ok(self.filter_log_file(log_file, query_request.query_fields, query_request.conditional_field.unwrap(), query_request.conditional_value.unwrap()))
     }
 }

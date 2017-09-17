@@ -34,9 +34,9 @@ impl QueryContext {
             None => return Err("Expected Log file node, got None".into())
         };
 
-        let right_node = match query_ast.right {
-            Some(n) => n,
-            None => return Err("Expected conditional query node, got None".into())
+        let optional_right_node = match query_ast.right {
+            Some(n) => Some(n),
+            None => None
         };
 
         if let log_ql::parser::GrammarItem::LogFile { ref fields, ref filename } = left_node.entry {
@@ -46,22 +46,24 @@ impl QueryContext {
             return Err("Couldn't deref Logfile node".into());
         }
 
-        if let log_ql::parser::GrammarItem::Condition { ref field, ref value } = right_node.entry {
-            request_builder.set_conditional_field(field.clone());
-            request_builder.set_conditional_value(value.clone());
-        } else {
-            return Err("Couldn't deref Conditional node".into());
+        if let Some(right_node) = optional_right_node {
+
+            if let Some(condition_node) = right_node.left {
+                if let log_ql::parser::GrammarItem::Condition { ref field, ref value } = condition_node.entry {
+                    request_builder.set_conditional_field(field.clone(), value.clone());
+                }
+            }
         }
 
         Ok(request_builder.build())
     }
 
-    fn filter_log_file(&self, log_file: log_file::LogFile, query_fields: Vec<String>, conditional_field: String, conditional_value: String) -> Vec<String> {
+    fn filter_log_file(&self, log_file: log_file::LogFile, query_request: QueryRequest) -> Vec<String> {
         log_file
-            .search_field(conditional_field, conditional_value)
+            .search_field(&query_request.conditional)
             .iter()
             .flat_map(|r| {
-                query_fields
+                query_request.query_fields
                     .iter()
                     .map(|query_field| r.get_field(query_field))
                     .collect::<Option<String>>()
@@ -72,7 +74,7 @@ impl QueryContext {
     pub fn execute_query(&self, query: String) -> Result<Vec<String>, String> {
         let query_request = self.parse(query)?;
 
-        let log_file = log_file::from_file(self.working_directory.join(query_request.log_filename), &self.configuration);
-        Ok(self.filter_log_file(log_file, query_request.query_fields, query_request.conditional_field.unwrap(), query_request.conditional_value.unwrap()))
+        let log_file = log_file::from_file(self.working_directory.join(&query_request.log_filename), &self.configuration);
+        Ok(self.filter_log_file(log_file, query_request))
     }
 }

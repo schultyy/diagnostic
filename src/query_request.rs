@@ -1,26 +1,28 @@
 pub struct QueryRequest {
     pub log_filename: String,
     pub query_fields: Vec<String>,
-    pub conditional_field: Option<String>,
-    pub conditional_value: Option<String>
+    pub conditional: Option<QueryClause>,
 }
 
 impl QueryRequest {
-    pub fn new(log_filename: String, query_fields: Vec<String>, conditional_field: Option<String>, conditional_value: Option<String>) -> QueryRequest {
+    pub fn new(log_filename: String, query_fields: Vec<String>, conditional_field: Option<QueryClause>) -> QueryRequest {
         QueryRequest {
             log_filename: log_filename,
             query_fields: query_fields,
-            conditional_field: conditional_field,
-            conditional_value: conditional_value
+            conditional: conditional_field
         }
     }
+}
+
+pub struct QueryClause {
+    pub conditional_field: String,
+    pub conditional_value: String
 }
 
 pub struct QueryRequestBuilder {
     pub log_filename: Option<String>,
     pub query_fields: Option<Vec<String>>,
-    pub conditional_field: Option<String>,
-    pub conditional_value: Option<String>
+    pub conditional: Option<QueryClause>
 }
 
 impl QueryRequestBuilder {
@@ -28,8 +30,7 @@ impl QueryRequestBuilder {
         QueryRequestBuilder {
             log_filename: None,
             query_fields: None,
-            conditional_field: None,
-            conditional_value: None
+            conditional: None
         }
     }
 
@@ -43,13 +44,12 @@ impl QueryRequestBuilder {
         self
     }
 
-    pub fn set_conditional_field(&mut self, conditional_field: String) -> &mut Self {
-        self.conditional_field = Some(conditional_field);
-        self
-    }
+    pub fn set_conditional_field(&mut self, conditional_field: String, conditional_value: String) -> &mut Self {
+        self.conditional = Some(QueryClause{
+            conditional_field: conditional_field,
+            conditional_value: conditional_value
+        });
 
-    pub fn set_conditional_value(&mut self, conditional_value: String) -> &mut Self {
-        self.conditional_value = Some(conditional_value);
         self
     }
 
@@ -57,8 +57,7 @@ impl QueryRequestBuilder {
         QueryRequest::new(
             self.log_filename.expect("log filename must be present"),
             self.query_fields.expect("query fields must be present"),
-            self.conditional_field,
-            self.conditional_value
+            self.conditional
         )
     }
 }

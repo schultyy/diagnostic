@@ -1,15 +1,19 @@
+use log_ql::parser::LimitDirection;
+
 pub struct QueryRequest {
     pub log_filename: String,
     pub query_fields: Vec<String>,
     pub conditional: Option<QueryClause>,
+    pub limit_clause: Option<LimitClause>
 }
 
 impl QueryRequest {
-    pub fn new(log_filename: String, query_fields: Vec<String>, conditional_field: Option<QueryClause>) -> QueryRequest {
+    pub fn new(log_filename: String, query_fields: Vec<String>, conditional_field: Option<QueryClause>, limit: Option<LimitClause>) -> QueryRequest {
         QueryRequest {
             log_filename: log_filename,
             query_fields: query_fields,
-            conditional: conditional_field
+            conditional: conditional_field,
+            limit_clause: limit
         }
     }
 }
@@ -19,10 +23,16 @@ pub struct QueryClause {
     pub conditional_value: String
 }
 
+pub struct LimitClause {
+    pub number_of_rows: i64,
+    pub direction: LimitDirection
+}
+
 pub struct QueryRequestBuilder {
     pub log_filename: Option<String>,
     pub query_fields: Option<Vec<String>>,
-    pub conditional: Option<QueryClause>
+    pub conditional: Option<QueryClause>,
+    pub limit: Option<LimitClause>
 }
 
 impl QueryRequestBuilder {
@@ -30,7 +40,8 @@ impl QueryRequestBuilder {
         QueryRequestBuilder {
             log_filename: None,
             query_fields: None,
-            conditional: None
+            conditional: None,
+            limit: None
         }
     }
 
@@ -53,11 +64,21 @@ impl QueryRequestBuilder {
         self
     }
 
+    pub fn set_limit_field(&mut self, number_of_rows: i64, direction: LimitDirection) -> &mut Self {
+        self.limit = Some(LimitClause{
+            number_of_rows: number_of_rows,
+            direction: direction
+        });
+
+        self
+    }
+
     pub fn build(self) -> QueryRequest {
         QueryRequest::new(
             self.log_filename.expect("log filename must be present"),
             self.query_fields.expect("query fields must be present"),
-            self.conditional
+            self.conditional,
+            self.limit
         )
     }
 }

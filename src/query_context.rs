@@ -46,11 +46,17 @@ impl QueryContext {
             return Err("Couldn't deref Logfile node".into());
         }
 
-        if let Some(right_node) = optional_right_node {
+        if let Some(where_and_limit_node) = optional_right_node {
 
-            if let Some(condition_node) = right_node.left {
+            if let &Some(ref condition_node) = &where_and_limit_node.left {
                 if let log_ql::parser::GrammarItem::Condition { ref field, ref value } = condition_node.entry {
                     request_builder.set_conditional_field(field.clone(), value.clone());
+                }
+            }
+
+            if let Some(limit_node) = where_and_limit_node.right {
+                if let log_ql::parser::GrammarItem::Limit { number_of_rows, direction } = limit_node.entry {
+                    request_builder.set_limit_field(number_of_rows, direction);
                 }
             }
         }

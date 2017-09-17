@@ -1,6 +1,7 @@
 mod query_context;
 mod configuration;
 mod log_file;
+mod query_request;
 
 
 #[macro_use]

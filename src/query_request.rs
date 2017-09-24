@@ -1,5 +1,6 @@
 use log_ql;
 
+#[derive(Debug)]
 pub struct QueryRequest {
     pub log_filename: String,
     pub query_fields: Vec<String>,
@@ -18,11 +19,13 @@ impl QueryRequest {
     }
 }
 
+#[derive(Debug)]
 pub struct QueryClause {
     pub conditional_field: String,
     pub conditional_value: String
 }
 
+#[derive(Debug)]
 pub struct LimitClause {
     pub number_of_rows: usize,
     pub direction: log_ql::parser::LimitDirection

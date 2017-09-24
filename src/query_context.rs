@@ -47,10 +47,15 @@ impl QueryContext {
         }
 
         if let Some(right_node) = optional_right_node {
-
-            if let Some(condition_node) = right_node.left {
+            if let Some(condition_node) = right_node.clone().left {
                 if let log_ql::parser::GrammarItem::Condition { ref field, ref value } = condition_node.entry {
                     request_builder.set_conditional_field(field.clone(), value.clone());
+                }
+            }
+
+            if let Some(limit_node) = right_node.clone().right {
+                if let log_ql::parser::GrammarItem::Limit { ref number_of_rows, ref direction } = limit_node.entry {
+                    request_builder.set_limit_clause(number_of_rows.clone(), direction.clone());
                 }
             }
         }
@@ -59,8 +64,34 @@ impl QueryContext {
     }
 
     fn filter_log_file(&self, log_file: log_file::LogFile, query_request: QueryRequest) -> Vec<String> {
-        log_file
-            .search_field(&query_request.conditional)
+        let filtered_log_results = log_file
+            .search_field(&query_request.conditional);
+
+        let limited_log_results;
+
+        if let Some(limit_clause) = query_request.limit.clone() {
+            if limit_clause.direction == log_ql::parser::LimitDirection::Last {
+                let len = filtered_log_results.len();
+
+                limited_log_results = filtered_log_results
+                    .iter()
+                    .skip(len - 1 - limit_clause.number_of_rows)
+                    .take(limit_clause.number_of_rows)
+                    .map(|r| r.clone())
+                    .collect::<Vec<log_file::Row>>();
+            }
+            else {
+                limited_log_results = filtered_log_results
+                    .iter()
+                    .take(limit_clause.number_of_rows)
+                    .map(|r| r.clone())
+                    .collect::<Vec<log_file::Row>>();
+            }
+        } else {
+            limited_log_results = filtered_log_results;
+        }
+
+        limited_log_results
             .iter()
             .flat_map(|r| {
                 query_request.query_fields
@@ -76,5 +107,43 @@ impl QueryContext {
 
         let log_file = log_file::from_file(self.working_directory.join(&query_request.log_filename), &self.configuration);
         Ok(self.filter_log_file(log_file, query_request))
+    }
+}
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use configuration;
+
+    fn build_query_context() -> QueryContext {
+        let configuration = configuration::Configuration::from_file("./support/config.json");
+        QueryContext::new("./support", configuration).unwrap()
+    }
+
+    #[test]
+    fn query_with_where_clause_returns_exactly_filtered_rows() {
+        let query = "SELECT severity FROM 'travis.log' WHERE severity = 'INFO'".into();
+        let query_context = build_query_context();
+        let result_set = query_context.execute_query(query).unwrap();
+        assert_eq!(result_set.len(), 20);
+    }
+
+    #[test]
+    fn query_with_limit_10_returns_exactly_the_first_10_lines() {
+        let query = "SELECT component FROM 'travis.log' LIMIT 10".into();
+        let query_context = build_query_context();
+        let result_set = query_context.execute_query(query).unwrap();
+        assert_eq!(result_set.len(), 10);
+    }
+
+    #[test]
+    fn query_with_limit_last_2_returns_exactly_the_last_2_lines() {
+        let query = "SELECT message FROM 'travis.log' LIMIT LAST 2".into();
+        let query_context = build_query_context();
+        let result_set = query_context.execute_query(query).unwrap();
+        assert_eq!(result_set.len(), 2);
+        assert_eq!(result_set[0], " Called from /usr/local/travis-pro-api/vendor/bundle/ruby/2.3.0/gems/activesupport-3.2.22.5/lib/active_support/dependencies.rb:251:in `block in require'");
+        assert_eq!(result_set[1], " ** [Raven] URI out of scope: //api/v3/user?per_page=100 excluded from capture due to environment or should_capture callback");
     }
 }

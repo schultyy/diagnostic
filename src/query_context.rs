@@ -70,11 +70,23 @@ impl QueryContext {
         let limited_log_results;
 
         if let Some(limit_clause) = query_request.limit.clone() {
-            limited_log_results = filtered_log_results
-                .iter()
-                .take(limit_clause.number_of_rows)
-                .map(|r| r.clone())
-                .collect::<Vec<log_file::Row>>();
+            if limit_clause.direction == log_ql::parser::LimitDirection::Last {
+                let len = filtered_log_results.len();
+
+                limited_log_results = filtered_log_results
+                    .iter()
+                    .skip(len - 1 - limit_clause.number_of_rows)
+                    .take(limit_clause.number_of_rows)
+                    .map(|r| r.clone())
+                    .collect::<Vec<log_file::Row>>();
+            }
+            else {
+                limited_log_results = filtered_log_results
+                    .iter()
+                    .take(limit_clause.number_of_rows)
+                    .map(|r| r.clone())
+                    .collect::<Vec<log_file::Row>>();
+            }
         } else {
             limited_log_results = filtered_log_results;
         }
@@ -118,10 +130,20 @@ mod tests {
     }
 
     #[test]
-    fn query_with_limit_10_returns_exactly_10_lines() {
+    fn query_with_limit_10_returns_exactly_the_first_10_lines() {
         let query = "SELECT component FROM 'travis.log' LIMIT 10".into();
         let query_context = build_query_context();
         let result_set = query_context.execute_query(query).unwrap();
         assert_eq!(result_set.len(), 10);
+    }
+
+    #[test]
+    fn query_with_limit_last_2_returns_exactly_the_last_2_lines() {
+        let query = "SELECT message FROM 'travis.log' LIMIT LAST 2".into();
+        let query_context = build_query_context();
+        let result_set = query_context.execute_query(query).unwrap();
+        assert_eq!(result_set.len(), 2);
+        assert_eq!(result_set[0], " Called from /usr/local/travis-pro-api/vendor/bundle/ruby/2.3.0/gems/activesupport-3.2.22.5/lib/active_support/dependencies.rb:251:in `block in require'");
+        assert_eq!(result_set[1], " ** [Raven] URI out of scope: //api/v3/user?per_page=100 excluded from capture due to environment or should_capture callback");
     }
 }

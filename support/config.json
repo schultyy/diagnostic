@@ -1,0 +1,25 @@
+{
+  "file_type": "travis_log_last_2000.log",
+  "columns": [
+    {
+      "name": "date",
+      "capture_group": 0,
+      "regex": "\\[(\\d+-\\d+-\\d+T\\d+:\\d+:\\d+\\+\\d+)\\]"
+    },
+    {
+      "name": "component",
+      "capture_group": 0,
+      "regex": "\\[((\\w+-?:?)+)\\]"
+    },
+    {
+      "name": "message",
+      "capture_group": 2,
+      "regex": "\\[\\d+-\\d+-\\d+T\\d+:\\d+:\\d+\\+\\d+\\]\\[(\\w+-?:?)+\\](.+)"
+    },
+    {
+      "name": "severity",
+      "capture_group": 0,
+      "regex": "(ERROR|INFO)"
+    }
+  ]
+}

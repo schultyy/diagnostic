@@ -1,0 +1,50 @@
+[2017-07-18T21:59:01+0000][travis-pro-api:sidekiq] 2017-07-18T21:59:01.544Z 3302 TID-otzuy2hvs INFO: Booting Sidekiq 3.4.1 with redis options {:url=>"redis://127.0.0.1:6379", :timeout=>20, :namespace=>"sidekiq"}
+[2017-07-18T21:59:01+0000][travis-pro-api:sidekiq] 2017-07-18T21:59:01.555Z 3302 TID-otzuy2hvs INFO: Running in ruby 2.3.1p112 (2016-04-26 revision 54768) [x86_64-linux]
+[2017-07-18T21:59:01+0000][travis-pro-api:sidekiq] 2017-07-18T21:59:01.555Z 3302 TID-otzuy2hvs INFO: See LICENSE and the LGPL-3.0 for licensing details.
+[2017-07-18T21:59:01+0000][travis-pro-api:sidekiq] 2017-07-18T21:59:01.555Z 3302 TID-otzuy2hvs INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
+[2017-07-18T21:59:01+0000][travis-pro-api:sidekiq] 2017-07-18T21:59:01.567Z 3302 TID-otzuy2hvs INFO: Starting processing, hit Ctrl-C to stop
+[2017-07-18T21:59:02+0000][travis-gatekeeper:gator] I TID=9540 No metrics reporter configured.
+[2017-07-18T21:59:02+0000][travis-gatekeeper:gator] I TID=9540 Setting up Topaz
+[2017-07-18T21:59:02+0000][travis-gatekeeper:gator] 2017-07-18T21:59:02.332Z 3308 TID-osa4z8tck INFO: Booting Sidekiq 4.1.4 with redis options {:url=>"redis://127.0.0.1:6379", :namespace=>"sidekiq"}
+[2017-07-18T21:59:06+0000][travis-pro-api:cron] I TID=69854378643720 No metriks reporter configured.
+[2017-07-18T21:59:06+0000][travis-pro-api:web] I, [2017-07-18T21:59:06.926876 #3912]  INFO -- : worker=0 spawned pid=3912
+[2017-07-18T21:59:06+0000][travis-pro-api:web] I, [2017-07-18T21:59:06.928057 #3912]  INFO -- : Refreshing Gem list
+[2017-07-18T21:59:06+0000][travis-pro-api:web] I, [2017-07-18T21:59:06.964232 #3915]  INFO -- : worker=1 spawned pid=3915
+[2017-07-18T21:59:06+0000][travis-pro-api:web] I, [2017-07-18T21:59:06.964440 #3915]  INFO -- : Refreshing Gem list
+[2017-07-18T21:59:06+0000][travis-pro-api:web] I, [2017-07-18T21:59:06.985884 #3918]  INFO -- : worker=2 spawned pid=3918
+[2017-07-18T21:59:06+0000][travis-pro-api:web] I, [2017-07-18T21:59:06.986115 #3918]  INFO -- : Refreshing Gem list
+[2017-07-18T21:59:06+0000][travis-pro-api:web] I, [2017-07-18T21:59:07.000771 #3417]  INFO -- : master process ready
+[2017-07-18T21:59:07+0000][travis-pro-api:web] I TID=70351344947480 No metriks reporter configured.
+[2017-07-18T21:59:07+0000][travis-pro-api:web] I, [2017-07-18T21:59:07.014057 #3921]  INFO -- : worker=3 spawned pid=3921
+[2017-07-18T21:59:07+0000][travis-pro-api:web] I, [2017-07-18T21:59:07.014235 #3921]  INFO -- : Refreshing Gem list
+[2017-07-18T21:59:07+0000][travis-pro-api:web] I TID=70351344947480 No metriks reporter configured.
+[2017-07-18T21:59:07+0000][travis-pro-api:web] I TID=70351344947480 No metriks reporter configured.
+[2017-07-18T21:59:07+0000][travis-pro-api:web] I TID=70351344947480 No metriks reporter configured.
+[2017-07-18T21:59:07+0000][travis-logs:aggregate] I ** Starting Logs Aggregation **
+[2017-07-18T21:59:07+0000][travis-logs:aggregate] I No metriks reporter configured.
+[2017-07-18T21:59:07+0000][travis-logs:aggregate] I Setting up Sidekiq (pool size: 22) and Redis (connecting to host 127.0.0.1)
+[2017-07-18T21:59:08+0000][travis-pro-api:cron] I TID=69854378643720 Starting cron jobs scheduler now
+[2017-07-18T21:59:08+0000][travis-pro-api:cron] The PGconn, PGresult, and PGError constants are deprecated, and will be
+[2017-07-18T21:59:08+0000][travis-pro-api:cron] removed as of version 1.0.
+[2017-07-18T21:59:08+0000][travis-pro-api:cron] 
+[2017-07-18T21:59:08+0000][travis-pro-api:cron] You should use PG::Connection, PG::Result, and PG::Error instead, respectively.
+[2017-07-18T21:59:08+0000][travis-pro-api:cron] 
+[2017-07-18T21:59:08+0000][travis-pro-api:cron] Called from /usr/local/travis-pro-api/vendor/bundle/ruby/2.3.0/gems/activesupport-3.2.22.5/lib/active_support/dependencies.rb:251:in `block in require'
+[2017-07-18T21:59:08+0000][travis-logs:logs] I ** Starting Log Parts Processor **
+[2017-07-18T21:59:08+0000][travis-logs:logs] I No metriks reporter configured.
+[2017-07-18T21:59:09+0000][travis-pro-api:web] I, [2017-07-18T21:59:09.137524 #3912]  INFO -- : worker=0 ready
+[2017-07-18T21:59:09+0000][travis-pro-api:web] I, [2017-07-18T21:59:09.219838 #3918]  INFO -- : worker=2 ready
+[2017-07-18T21:59:09+0000][travis-pro-api:web] I, [2017-07-18T21:59:09.229664 #3921]  INFO -- : worker=3 ready
+[2017-07-18T21:59:09+0000][travis-pro-api:web] I, [2017-07-18T21:59:09.428920 #3915]  INFO -- : worker=1 ready
+[2017-07-18T21:59:11+0000][travis-logs:aggregator] I ** Setting up Sidekiq **
+[2017-07-18T21:59:11+0000][travis-logs:aggregator] I No metriks reporter configured.
+[2017-07-18T21:59:12+0000][travis-logs:aggregator] I Setting up Sidekiq (pool size: 22) and Redis (connecting to host 127.0.0.1)
+[2017-07-18T21:59:12+0000][travis-logs:aggregator] 2017-07-18T21:59:12.709Z 3709 TID-1jm INFO: Booting Sidekiq 4.2.7 with redis options {:url=>"redis://127.0.0.1:6379", :namespace=>"sidekiq", :size=>22}
+[2017-07-18T21:59:12+0000][travis-logs:aggregator] The signal USR1 is in use by the JVM and will not work correctly on this platform
+[2017-07-18T22:02:28+0000][travis-pro-api:web] The PGconn, PGresult, and PGError constants are deprecated, and will be
+[2017-07-18T22:02:28+0000][travis-pro-api:web] removed as of version 1.0.
+[2017-07-18T22:02:28+0000][travis-pro-api:web] 
+[2017-07-18T22:02:28+0000][travis-pro-api:web] You should use PG::Connection, PG::Result, and PG::Error instead, respectively.
+[2017-07-18T22:02:28+0000][travis-pro-api:web] 
+[2017-07-18T22:02:28+0000][travis-pro-api:web] Called from /usr/local/travis-pro-api/vendor/bundle/ruby/2.3.0/gems/activesupport-3.2.22.5/lib/active_support/dependencies.rb:251:in `block in require'
+[2017-07-18T22:02:29+0000][travis-pro-api:web] ** [Raven] URI out of scope: //api/v3/user?per_page=100 excluded from capture due to environment or should_capture callback

@@ -64,11 +64,24 @@ impl QueryContext {
         Ok(request_builder.build())
     }
 
+    fn limit_search_results(&self, search_results: Vec<log_file::Row>, query_request: &QueryRequest) -> Vec<log_file::Row> {
+        if let &Some(ref limit_clause) = &query_request.limit_clause {
+            search_results
+                .iter()
+                .take(limit_clause.number_of_rows)
+                .map(|r| r.clone())
+                .collect::<Vec<log_file::Row>>()
+        } else {
+            search_results
+        }
+    }
+
     fn filter_log_file(&self, log_file: log_file::LogFile, query_request: QueryRequest) -> Vec<String> {
-        log_file
-            .search_field(&query_request.conditional)
-            .iter()
-            .flat_map(|r| {
+        let all_search_results = log_file.search_field(&query_request.conditional);
+
+        let limited_search_results = self.limit_search_results(all_search_results, &query_request);
+
+        limited_search_results.iter().flat_map(|r| {
                 query_request.query_fields
                     .iter()
                     .map(|query_field| r.get_field(query_field))
@@ -82,5 +95,22 @@ impl QueryContext {
 
         let log_file = log_file::from_file(self.working_directory.join(&query_request.log_filename), &self.configuration);
         Ok(self.filter_log_file(log_file, query_request))
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use configuration;
+    use super::*;
+
+    fn load_configuration() -> configuration::Configuration {
+        configuration::Configuration::from_file("./test_support/config.json")
+    }
+
+    #[test]
+    fn test_query_with_limit_10_clause() {
+        let query_context = QueryContext::new("./test_support", load_configuration()).unwrap();
+        let results = query_context.execute_query("SELECT date FROM 'travis.log' LIMIT 10".into()).unwrap();
+        assert_eq!(results.len(), 10);
     }
 }

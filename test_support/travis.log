@@ -1,0 +1,100 @@
+[2017-08-20T20:21:09+0000][travis-pro-api:web] Using ruby version: 2.3.1
+[2017-08-20T20:21:09+0000][travis-pro-api:web] port=5100 rack_env=production web_concurrency=4 nginx_workers=4
+[2017-08-20T20:21:09+0000][travis-pro-api:web] I, [2017-08-20T20:21:09.861418 #30007]  INFO -- : listening on addr=127.0.0.1:5100 fd=9
+[2017-08-20T20:21:11+0000][travis-pro-api:web] I TID=70334251061520 Setting up module Travis
+[2017-08-20T20:21:11+0000][travis-pro-api:web] ERROR: Your license expired on 2017-08-18.
+[2017-08-20T20:21:11+0000][travis-pro-api:web] Using ruby version: 2.3.1
+[2017-08-20T20:21:11+0000][travis-pro-api:web] port=5100 rack_env=production web_concurrency=4 nginx_workers=4
+[2017-08-20T20:21:11+0000][travis-pro-api:web] I, [2017-08-20T20:21:11.880243 #30122]  INFO -- : listening on addr=127.0.0.1:5100 fd=9
+[2017-08-20T20:21:13+0000][travis-pro-api:web] I TID=69969151578380 Setting up module Travis
+[2017-08-20T20:21:13+0000][travis-pro-api:web] ERROR: Your license expired on 2017-08-18.
+[2017-08-20T20:21:13+0000][travis-pro-api:web] Using ruby version: 2.3.1
+[2017-08-20T20:21:13+0000][travis-pro-api:web] port=5100 rack_env=production web_concurrency=4 nginx_workers=4
+[2017-08-20T20:21:13+0000][travis-pro-api:web] I, [2017-08-20T20:21:13.926627 #30239]  INFO -- : listening on addr=127.0.0.1:5100 fd=9
+[2017-08-20T20:21:15+0000][travis-pro-api:web] I TID=69964785307920 Setting up module Travis
+[2017-08-20T20:21:15+0000][travis-pro-api:web] ERROR: Your license expired on 2017-08-18.
+[2017-08-20T20:21:15+0000][travis-pro-api:web] Using ruby version: 2.3.1
+[2017-08-20T20:21:15+0000][travis-pro-api:web] port=5100 rack_env=production web_concurrency=4 nginx_workers=4
+[2017-08-20T20:21:16+0000][travis-pro-api:web] I, [2017-08-20T20:21:16.021209 #30354]  INFO -- : listening on addr=127.0.0.1:5100 fd=9
+[2017-08-20T20:21:17+0000][travis-pro-api:web] I TID=70049608814860 Setting up module Travis
+[2017-08-20T20:21:17+0000][travis-pro-api:web] ERROR: Your license expired on 2017-08-18.
+[2017-08-20T20:21:17+0000][travis-pro-api:web] Using ruby version: 2.3.1
+[2017-08-20T20:21:17+0000][travis-pro-api:web] port=5100 rack_env=production web_concurrency=4 nginx_workers=4
+[2017-08-20T20:21:18+0000][travis-pro-api:web] I, [2017-08-20T20:21:18.026317 #30469]  INFO -- : listening on addr=127.0.0.1:5100 fd=9
+[2017-08-20T20:21:19+0000][travis-pro-api:web] I TID=70337117868300 Setting up module Travis
+[2017-08-20T20:21:19+0000][travis-pro-api:web] ERROR: Your license expired on 2017-08-18.
+[2017-08-20T20:21:19+0000][travis-pro-api:web] Using ruby version: 2.3.1
+[2017-08-20T20:21:19+0000][travis-pro-api:web] port=5100 rack_env=production web_concurrency=4 nginx_workers=4
+[2017-08-20T20:21:20+0000][travis-pro-api:web] I, [2017-08-20T20:21:20.039353 #30584]  INFO -- : listening on addr=127.0.0.1:5100 fd=9
+[2017-08-20T20:21:21+0000][travis-pro-api:web] I TID=70239403168020 Setting up module Travis
+[2017-08-20T20:21:21+0000][travis-pro-api:web] ERROR: Your license expired on 2017-08-18.
+[2017-08-20T20:21:21+0000][travis-pro-api:web] Using ruby version: 2.3.1
+[2017-08-20T20:21:21+0000][travis-pro-api:web] port=5100 rack_env=production web_concurrency=4 nginx_workers=4
+[2017-08-20T20:21:22+0000][travis-pro-api:web] I, [2017-08-20T20:21:22.056672 #30699]  INFO -- : listening on addr=127.0.0.1:5100 fd=9
+[2017-08-20T20:21:22+0000][travis-scheduler:scheduler] I Locking scheduler.ping with: redis, ttl: 150000s
+[2017-08-20T20:21:22+0000][travis-scheduler:scheduler] I Found 0 owners to ping.
+[2017-08-20T20:21:23+0000][travis-pro-api:web] I TID=70222871318800 Setting up module Travis
+[2017-08-20T20:21:23+0000][travis-pro-api:web] ERROR: Your license expired on 2017-08-18.
+[2017-08-20T20:21:23+0000][travis-pro-api:web] Using ruby version: 2.3.1
+[2017-08-20T20:21:23+0000][travis-pro-api:web] port=5100 rack_env=production web_concurrency=4 nginx_workers=4
+[2017-08-20T20:21:24+0000][travis-pro-api:web] I, [2017-08-20T20:21:24.076395 #30816]  INFO -- : listening on addr=127.0.0.1:5100 fd=9
+[2017-08-20T20:21:25+0000][travis-pro-api:web] I TID=70070265762060 Setting up module Travis
+[2017-08-20T20:21:25+0000][travis-pro-api:web] ERROR: Your license expired on 2017-08-18.
+[2017-08-20T20:21:25+0000][travis-pro-api:web] Using ruby version: 2.3.1
+[2017-08-20T20:21:25+0000][travis-pro-api:web] port=5100 rack_env=production web_concurrency=4 nginx_workers=4
+[2017-08-20T20:21:26+0000][travis-pro-api:web] I, [2017-08-20T20:21:26.125784 #30936]  INFO -- : listening on addr=127.0.0.1:5100 fd=9
+[2017-08-20T20:21:27+0000][travis-pro-api:web] I TID=69888230871320 Setting up module Travis
+[2017-08-20T20:21:27+0000][travis-pro-api:web] ERROR: Your license expired on 2017-08-18.
+[2017-08-20T20:21:27+0000][travis-pro-api:web] Using ruby version: 2.3.1
+[2017-08-20T20:21:27+0000][travis-pro-api:web] port=5100 rack_env=production web_concurrency=4 nginx_workers=4
+[2017-08-20T20:21:28+0000][travis-pro-api:web] I, [2017-08-20T20:21:28.260475 #31096]  INFO -- : listening on addr=127.0.0.1:5100 fd=9
+[2017-08-20T20:21:29+0000][travis-pro-api:web] I TID=70205100052760 Setting up module Travis
+[2017-08-20T20:21:29+0000][travis-pro-api:web] ERROR: Your license expired on 2017-08-18.
+[2017-08-20T20:21:30+0000][travis-pro-api:web] Using ruby version: 2.3.1
+[2017-08-20T20:21:30+0000][travis-pro-api:web] port=5100 rack_env=production web_concurrency=4 nginx_workers=4
+[2017-08-20T20:21:30+0000][travis-pro-api:web] I, [2017-08-20T20:21:30.425539 #31211]  INFO -- : listening on addr=127.0.0.1:5100 fd=9
+[2017-08-20T20:21:32+0000][travis-pro-api:web] I TID=70018942161160 Setting up module Travis
+[2017-08-20T20:21:32+0000][travis-pro-api:web] ERROR: Your license expired on 2017-08-18.
+[2017-08-20T20:21:32+0000][travis-pro-api:web] Using ruby version: 2.3.1
+[2017-08-20T20:21:32+0000][travis-pro-api:web] port=5100 rack_env=production web_concurrency=4 nginx_workers=4
+[2017-08-20T20:21:32+0000][travis-pro-api:web] I, [2017-08-20T20:21:32.528651 #31328]  INFO -- : listening on addr=127.0.0.1:5100 fd=9
+[2017-08-20T20:21:34+0000][travis-pro-api:web] I TID=69881979261200 Setting up module Travis
+[2017-08-20T20:21:34+0000][travis-pro-api:web] ERROR: Your license expired on 2017-08-18.
+[2017-08-20T20:21:34+0000][travis-pro-api:web] Using ruby version: 2.3.1
+[2017-08-20T20:21:34+0000][travis-pro-api:web] port=5100 rack_env=production web_concurrency=4 nginx_workers=4
+[2017-08-20T20:21:34+0000][travis-pro-api:web] I, [2017-08-20T20:21:34.633960 #31443]  INFO -- : listening on addr=127.0.0.1:5100 fd=9
+[2017-08-20T20:21:36+0000][travis-pro-api:web] I TID=70136158277900 Setting up module Travis
+[2017-08-20T20:21:36+0000][travis-pro-api:web] ERROR: Your license expired on 2017-08-18.
+[2017-08-20T20:21:36+0000][travis-pro-api:web] Using ruby version: 2.3.1
+[2017-08-20T20:21:36+0000][travis-pro-api:web] port=5100 rack_env=production web_concurrency=4 nginx_workers=4
+[2017-08-20T20:21:36+0000][travis-pro-api:web] I, [2017-08-20T20:21:36.658920 #31559]  INFO -- : listening on addr=127.0.0.1:5100 fd=9
+[2017-08-20T20:21:38+0000][travis-pro-api:web] I TID=69973045989640 Setting up module Travis
+[2017-08-20T20:21:38+0000][travis-pro-api:web] ERROR: Your license expired on 2017-08-18.
+[2017-08-20T20:21:38+0000][travis-pro-api:web] Using ruby version: 2.3.1
+[2017-08-20T20:21:38+0000][travis-pro-api:web] port=5100 rack_env=production web_concurrency=4 nginx_workers=4
+[2017-08-20T20:21:38+0000][travis-pro-api:web] I, [2017-08-20T20:21:38.704235 #31674]  INFO -- : listening on addr=127.0.0.1:5100 fd=9
+[2017-08-20T20:21:40+0000][travis-pro-api:web] I TID=69874060415240 Setting up module Travis
+[2017-08-20T20:21:40+0000][travis-pro-api:web] ERROR: Your license expired on 2017-08-18.
+[2017-08-20T20:21:40+0000][travis-pro-api:web] Using ruby version: 2.3.1
+[2017-08-20T20:21:40+0000][travis-pro-api:web] port=5100 rack_env=production web_concurrency=4 nginx_workers=4
+[2017-08-20T20:21:40+0000][travis-pro-api:web] I, [2017-08-20T20:21:40.807577 #31791]  INFO -- : listening on addr=127.0.0.1:5100 fd=9
+[2017-08-20T20:21:42+0000][travis-pro-api:web] I TID=69875314512140 Setting up module Travis
+[2017-08-20T20:21:42+0000][travis-pro-api:web] ERROR: Your license expired on 2017-08-18.
+[2017-08-20T20:21:42+0000][travis-pro-api:web] Using ruby version: 2.3.1
+[2017-08-20T20:21:42+0000][travis-pro-api:web] port=5100 rack_env=production web_concurrency=4 nginx_workers=4
+[2017-08-20T20:21:42+0000][travis-pro-api:web] I, [2017-08-20T20:21:42.947837 #31906]  INFO -- : listening on addr=127.0.0.1:5100 fd=9
+[2017-08-20T20:21:44+0000][travis-pro-api:web] I TID=70345925906700 Setting up module Travis
+[2017-08-20T20:21:44+0000][travis-pro-api:web] ERROR: Your license expired on 2017-08-18.
+[2017-08-20T20:21:44+0000][travis-pro-api:web] Using ruby version: 2.3.1
+[2017-08-20T20:21:44+0000][travis-pro-api:web] port=5100 rack_env=production web_concurrency=4 nginx_workers=4
+[2017-08-20T20:21:45+0000][travis-pro-api:web] I, [2017-08-20T20:21:45.129034 #32021]  INFO -- : listening on addr=127.0.0.1:5100 fd=9
+[2017-08-20T20:21:46+0000][travis-pro-api:web] I TID=70123814441240 Setting up module Travis
+[2017-08-20T20:21:46+0000][travis-pro-api:web] ERROR: Your license expired on 2017-08-18.
+[2017-08-20T20:21:46+0000][travis-pro-api:web] Using ruby version: 2.3.1
+[2017-08-20T20:21:46+0000][travis-pro-api:web] port=5100 rack_env=production web_concurrency=4 nginx_workers=4
+[2017-08-20T20:21:47+0000][travis-pro-api:web] I, [2017-08-20T20:21:47.177951 #32136]  INFO -- : listening on addr=127.0.0.1:5100 fd=9
+[2017-08-20T20:21:48+0000][travis-pro-api:web] I TID=70194402480400 Setting up module Travis
+[2017-08-20T20:21:49+0000][travis-pro-api:web] ERROR: Your license expired on 2017-08-18.
+[2017-08-20T20:21:49+0000][travis-pro-api:web] Using ruby version: 2.3.1
+[2017-08-20T20:21:49+0000][travis-pro-api:web] port=5100 rack_env=production web_concurrency=4 nginx_workers=4
+[2017-08-20T20:21:49+0000][travis-pro-api:web] I, [2017-08-20T20:21:49.512349 #32254]  INFO -- : listening on addr=127.0.0.1:5100 fd=9

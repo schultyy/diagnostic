@@ -71,6 +71,11 @@ impl QueryContext {
         }
 
         if let &Some(ref limit_clause) = &query_request.limit_clause {
+
+            if limit_clause.number_of_rows > search_results.len() {
+                return search_results
+            }
+
             if limit_clause.direction == log_ql::parser::LimitDirection::First {
                 search_results
                     .iter()
@@ -137,5 +142,16 @@ mod tests {
         let query_context = build_query_context();
         let results = query_context.execute_query("SELECT date FROM 'travis.log' LIMIT LAST 1".into()).unwrap();
         assert_eq!(results[0], "[2017-08-20T20:21:49+0000]");
+    }
+
+    #[test]
+    fn test_limit_last_n_rows_to_max_number_of_result_set() {
+        /*
+            Given the case a result set has 100 rows and the user tries to limit to the last 500 rows.
+            We then can only return the full result set
+        */
+        let query_context = build_query_context();
+        let results = query_context.execute_query("SELECT date FROM 'travis.log' LIMIT LAST 15000".into()).unwrap();
+        assert_eq!(results.len(), 100);
     }
 }

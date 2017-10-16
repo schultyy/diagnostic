@@ -1,4 +1,4 @@
-use std::fs::File;
+use std::fs::{self, File};
 use std::io::prelude::*;
 use serde_json;
 
@@ -17,7 +17,8 @@ pub struct Configuration {
 
 impl Configuration {
   pub fn from_file(filename: &str) -> Configuration {
-    let mut file = File::open(filename).unwrap();
+    let absolute_path = fs::canonicalize(filename).unwrap();
+    let mut file = File::open(absolute_path).unwrap();
     let mut serialized = String::new();
     file.read_to_string(&mut serialized);
 

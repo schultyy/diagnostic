@@ -24,7 +24,7 @@ pub struct QueryClause {
 }
 
 pub struct LimitClause {
-    pub number_of_rows: i64,
+    pub number_of_rows: usize,
     pub direction: LimitDirection
 }
 
@@ -64,7 +64,7 @@ impl QueryRequestBuilder {
         self
     }
 
-    pub fn set_limit_field(&mut self, number_of_rows: i64, direction: LimitDirection) -> &mut Self {
+    pub fn set_limit_field(&mut self, number_of_rows: usize, direction: LimitDirection) -> &mut Self {
         self.limit = Some(LimitClause{
             number_of_rows: number_of_rows,
             direction: direction

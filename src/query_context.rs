@@ -65,12 +65,26 @@ impl QueryContext {
     }
 
     fn limit_search_results(&self, search_results: Vec<log_file::Row>, query_request: &QueryRequest) -> Vec<log_file::Row> {
+
+        if search_results.len() == 0 {
+            return search_results
+        }
+
         if let &Some(ref limit_clause) = &query_request.limit_clause {
-            search_results
-                .iter()
-                .take(limit_clause.number_of_rows)
-                .map(|r| r.clone())
-                .collect::<Vec<log_file::Row>>()
+            if limit_clause.direction == log_ql::parser::LimitDirection::First {
+                search_results
+                    .iter()
+                    .take(limit_clause.number_of_rows)
+                    .map(|r| r.clone())
+                    .collect::<Vec<log_file::Row>>()
+            } else {
+                search_results
+                    .iter()
+                    .skip(search_results.len() - limit_clause.number_of_rows - 1)
+                    .take(limit_clause.number_of_rows)
+                    .map(|r| r.clone())
+                    .collect::<Vec<log_file::Row>>()
+            }
         } else {
             search_results
         }
@@ -107,10 +121,21 @@ mod tests {
         configuration::Configuration::from_file("./test_support/config.json")
     }
 
+    fn build_query_context() -> QueryContext {
+        QueryContext::new("./test_support", load_configuration()).unwrap()
+    }
+
     #[test]
     fn test_query_with_limit_10_clause() {
-        let query_context = QueryContext::new("./test_support", load_configuration()).unwrap();
+        let query_context = build_query_context();
         let results = query_context.execute_query("SELECT date FROM 'travis.log' LIMIT 10".into()).unwrap();
         assert_eq!(results.len(), 10);
+    }
+
+    #[test]
+    fn test_query_with_limit_last_1_clause() {
+        let query_context = build_query_context();
+        let results = query_context.execute_query("SELECT date FROM 'travis.log' LIMIT LAST 1".into()).unwrap();
+        assert_eq!(results[0], "[2017-08-20T20:21:49+0000]");
     }
 }
